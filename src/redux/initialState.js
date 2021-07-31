@@ -3,6 +3,7 @@ export let initialState = {
         id:null , 
         skinCode:undefined
     } ,
-    contactDetails: {} ,
+    contactDetails: {
+    } ,
     educationDetails : {}
 }
