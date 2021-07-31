@@ -9,6 +9,7 @@ function Contact(props) {
   let history = useHistory();
 
   const [contact , setContact] = useState(props.contactDetails); 
+  const [education , setEducation] = useState(props.educationDetails);
 
   const onchange = (event) => {
     var key = event.target.name; //FNAM
@@ -202,6 +203,7 @@ function Contact(props) {
         <div className="preview-card">
           <ResumePreview
             contactSection={contact}
+            educationSection = {education}
             skinCd={props?.document?.skinCode}
           ></ResumePreview>
         </div>
@@ -215,6 +217,7 @@ function mapStateToProps(store) {
   return {
     document: store.document,
     contactDetails: store.contact,
+    educationDetails: store.education,
   };
 }
 

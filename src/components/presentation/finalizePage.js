@@ -2,10 +2,10 @@ import React from "react";
 import ResumePreview from './resumePreview'
 import  jsPDF  from "jspdf";
 import html2canvas from 'html2canvas';
-
+import {connect} from "react-redux";
    function Finalize(props) {
-    let educationSection= props.educationSection
-    let contactSection=props.contactSection
+    let educationSection= props.educationDetails
+    let contactSection=props.contactDetails
     let document = props.document
   
     const saveToDatabase= async()=>{
@@ -32,7 +32,7 @@ import html2canvas from 'html2canvas';
       <div className="container full finalize-page" >
       <div className="funnel-section ">
           <div className="finalize-preview-card " id="resumePreview">
-            <ResumePreview contactSection={contactSection} educationSection={educationSection} skinCd={props?.document?.skinCd}></ResumePreview>   
+            <ResumePreview contactSection={contactSection} educationSection={educationSection} skinCd={props?.document?.skinCode}></ResumePreview>   
           </div>
           <div className="finalize-settings center">            
               <div className=" download-resume resume-options">
@@ -55,6 +55,14 @@ import html2canvas from 'html2canvas';
     
 }
 
+function mapStateToProps(store) {
+  console.log("Inside map state to props contact");
+  return {
+    document: store.document,
+    contactDetails: store.contact,
+    educationDetails: store.education,
+  };
+}
 
 
-export default (Finalize)
+export default connect(mapStateToProps)(Finalize);
