@@ -1,15 +1,25 @@
 import React from "react";
 import { skinCodes } from "../../constants/typeCodes";
-// import * as actionTypes from '../../actions/actionTypes';
-// import { bindActionCreators } from 'redux';
-// import { withRouter } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import uuid from "react-uuid";
 function GettingStarted(props) {
-  let history = useHistory();
 
-  const setSkinCode = async (skinCode) => {
-    // history.push('/contact');
+  const setSkinCode = async(skinCode) => {
+    console.log(skinCode);
+    console.log(props.document);
+    if(props.document.id == null){
+      let newDocument = {
+        id: uuid() ,
+        skinCode: skinCode
+      }
+      // setSkin
+      props.setSkin(newDocument);
+    }
+    else{
+      // updateSkin
+      props.updateSkin(skinCode);
+    }
+    props.history.push("/contact");
   };
 
   return (
@@ -25,7 +35,7 @@ function GettingStarted(props) {
               <div key={index} className="template-card rounded-border">
                 <i
                   className={
-                    skinCode == "demo-value" ? "selected fa fa-check" : "hide"
+                    skinCode == props.document.skinCode ? "selected fa fa-check" : "hide"
                   }
                 ></i>
                 <img className="" src={"/images/" + skinCode + ".svg"} />
